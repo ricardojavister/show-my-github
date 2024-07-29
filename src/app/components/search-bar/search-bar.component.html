@@ -1,0 +1,54 @@
+<form [formGroup]="form">
+  <div class="search-bar">
+    <input
+      type="text"
+      name="searchText"
+      formControlName="searchText"
+      placeholder="userName"
+    />
+    <button type="button" id="btnSearch" (click)="search()" class="btn">
+      Search
+    </button>
+  </div>
+  <div>
+    <ul *ngIf="currentUser">
+      <li>
+        Avatar Image:
+        <img [src]="currentUser.avatar_url" width="100" height="100" alt="" />
+      </li>
+      <li>
+        Username: <span>{{ currentUser.login }}</span>
+      </li>
+      <li>
+        Full name: <span>{{ currentUser.name }}</span>
+      </li>
+      <li>
+        Bio: <span>{{ currentUser.bio }}</span>
+      </li>
+      <li>
+        Number of public repositories:
+        <span>{{ currentUser.public_repos }}</span>
+      </li>
+      <li>
+        Number of followers: <span>{{ currentUser.followers }}</span>
+      </li>
+      <li>
+        Number of following: <span>{{ currentUser.following }}</span>
+      </li>
+    </ul>
+  </div>
+  <div class="repos-bar">
+    <button
+    type="button"
+    id="btnShowRepos"
+    *ngIf="currentUser"
+    (click)="showRepos()"
+    class="btn"
+  >
+    Show Repos
+  </button>
+  <div *ngIf="repos">
+    <li *ngFor="let item of repos">{{ item.name }}</li>
+  </div>
+  </div>
+</form>
